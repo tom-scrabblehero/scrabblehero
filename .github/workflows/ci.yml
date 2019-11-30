@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Start
+      run: docker-compose up --detach
+    - name: Test
+      run: docker-compose exec -T api pytest
+    - name: Deploy
+      run: echo "Deploying!"

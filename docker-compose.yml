@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: caniplay
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: production
+    ports:
+      - '5432:5432'
+  api:
+    build: ./docker/api
+    volumes:
+      - ./docker/api:/app
+    ports:
+      - '5000:5000'
+  www:
+    build: ./docker/www
