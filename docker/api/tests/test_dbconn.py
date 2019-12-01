@@ -13,3 +13,4 @@ def test_connection_url():
 def test_connection_with_test_app(app):
     db_url = app.config['DATABASE_URL']
     assert 'production' not in db_url
+    assert app.config['DATABASE_URL'] == app.config['SQLALCHEMY_DATABASE_URI']
