@@ -9,11 +9,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Start
-      run: docker-compose up --detach
+      run: docker-compose up --detach && docker-compose ps
     - name: Test
       run: docker-compose exec -T api pytest
     - name: Build
-      run: docker-compose exec www npm run build
+      run: docker-compose exec -T www npm run build
     - name: Deploy www
       uses: jakejarvis/s3-sync-action@master
       env:
