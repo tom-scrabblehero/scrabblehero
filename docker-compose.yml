@@ -16,3 +16,7 @@ services:
       - '5000:5000'
   www:
     build: ./docker/www
+    volumes:
+      - ./docker/www:/app
+    ports:
+      - '8080:8080'
