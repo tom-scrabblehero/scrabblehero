@@ -3,7 +3,7 @@ FROM python:3.8-alpine3.10
 ENV PYTHONPATH=.
 ENV PORT=5000
 
-RUN apk add binutils libc-dev
+RUN apk add binutils libc-dev postgresql-dev gcc
 
 RUN mkdir /app
 COPY . /app

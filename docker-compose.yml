@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:11-alpine
     environment:
-      POSTGRES_USER: caniplay
+      POSTGRES_USER: scrabblehero
       POSTGRES_PASSWORD: password
       POSTGRES_DB: production
     ports:
@@ -15,6 +15,8 @@ services:
     ports:
       - '5000:5000'
     command: flask run --host 0.0.0.0 --port 5000
+    environment:
+      DATABASE_URL: postgresql://scrabblehero:password@postgres:5432/production
   www:
     build: ./docker/www
     volumes:
