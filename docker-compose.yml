@@ -22,5 +22,6 @@ services:
     build: ./docker/www
     volumes:
       - ./docker/www:/app
+      - /app/node_modules
     ports:
       - '8080:8080'
