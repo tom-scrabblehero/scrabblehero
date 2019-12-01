@@ -1,0 +1,13 @@
+#!/bin/bash
+
+WORDNET_ARCHIVE_NAME=wn3.1.dict.tar.gz
+WORDNET_DB_URL=https://wordnetcode.princeton.edu/$WORDNET_ARCHIVE_NAME
+DATA_DIR=data
+
+cd $DATA_DIR \
+  && curl $WORDNET_DB_URL -O \
+  && tar -xvzf $WORDNET_ARCHIVE_NAME \
+  && mv dict wordnet \
+  && find . -type f ! -name 'index.*' -delete \
+  && rm -f wordnet/index.sense \
+  && rm -rf wordnet/dbfiles
