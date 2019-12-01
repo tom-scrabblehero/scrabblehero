@@ -1,7 +1,3 @@
-# Scrabble Hero
-
-![](https://github.com/tom-scrabblehero/scrabblehero/workflows/ci/badge.svg)
-
 ## Set up
 
 Start the docker services.
