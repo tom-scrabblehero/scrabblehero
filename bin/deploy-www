@@ -1,0 +1,1 @@
+aws s3 cp --recursive docker/www/dist s3://www.scrabblehero.com
