@@ -17,6 +17,7 @@ services:
     command: flask run --host 0.0.0.0 --port 5000
     environment:
       DATABASE_URL: postgresql://scrabblehero:password@postgres:5432/production
+      FLASK_ENV: development
   www:
     build: ./docker/www
     volumes:
