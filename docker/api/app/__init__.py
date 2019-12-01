@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 from werkzeug.utils import import_string
 
 from .models import db
@@ -13,6 +14,7 @@ def create_app(environment=None):
     app = Flask(__name__)
     app.config.from_object(config)
 
+    CORS(app)
     db.init_app(app)
 
     @app.route('/')
