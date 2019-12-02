@@ -9,6 +9,7 @@ import datetime as dt
 
 from alembic import op
 import sqlalchemy as sa
+from flask import current_app
 
 from app.utils import WordGenerator
 
@@ -29,11 +30,16 @@ def upgrade():
         sa.Column('value', sa.String(), nullable=False),
         sa.PrimaryKeyConstraint('value')
     )
+    current_app.logger.info("Created table")
     words = word_generator.generate_words()
+    current_app.logger.info("Generated words")
     created_at = updated_at = dt.datetime.now()
     for word in words:
         word.update({'created_at': created_at, 'updated_at': updated_at})
+    else:
+        current_app.logger.info("Updated fields on words")
     op.bulk_insert(word_table, words)
+    current_app.logger.info("Finished inserting words")
     # ### end Alembic commands ###
 
 
