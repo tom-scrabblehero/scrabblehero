@@ -7,6 +7,7 @@ from werkzeug.utils import import_string
 
 from .models import db, Word
 from .cli import seed
+from .resources import api
 
 
 migrate = Migrate(db)
@@ -32,9 +33,7 @@ def create_app(environment=None):
 
     app.shell_context_processor(shell_context)
     app.cli.add_command(seed)
-    
-    @app.route('/')
-    def index():
-        return "Hello world!"
+
+    api.init_app(app)
 
     return app
