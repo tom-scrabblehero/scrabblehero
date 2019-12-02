@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@vue/cli": "^4.1.1",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.1.0",
     "core-js": "^3.4.3",
     "vue": "^2.6.10"
   },
