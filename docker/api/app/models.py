@@ -15,5 +15,7 @@ class TimestampMixin(object):
 @dataclass
 class Word(db.Model, TimestampMixin):
     value: str
+    score: int
 
     value = db.Column(db.String(), primary_key=True)
+    score = db.Column(db.Integer(), nullable=False)
