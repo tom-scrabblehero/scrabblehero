@@ -32,5 +32,5 @@ class WordGenerator(object):
                     yield word
 
     def generate_words(self):
-        unique_words = list(set(self.iter_words()))
+        unique_words = list(sorted(set(self.iter_words())))
         return [{"value": w} for w in unique_words]
