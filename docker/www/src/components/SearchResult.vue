@@ -1,7 +1,7 @@
 <template>
   <div>
   <form @submit.prevent="checkValue">
-  <h2>{{ value }}</h2>
+  <h2 class="text-primary">{{ value }}</h2>
   <input type="text" placeholder="Search a word" ref="search" autofocus=true>
   <input type="submit" value="Submit">
   <p>{{ result }}</p>
