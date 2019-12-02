@@ -34,8 +34,6 @@ export default {
   },
   methods: {
     checkValue: function(e) {
-      console.log(e)
-      console.log(this.form.search)
       var that = this
       fetch(`${process.env.VUE_APP_API_URL}/words/${this.form.search}`).then(function(resp) {
         resp.json().then(function() {
@@ -49,7 +47,6 @@ export default {
           }
           that.result.value = that.form.search + ' ' + message
           that.result.show = true
-
         })
       })
     }
