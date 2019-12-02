@@ -1,7 +1,3 @@
 build:
   docker:
     web: docker/api/Dockerfile
-release:
-  image: web
-  command:
-    - flask db upgrade
