@@ -1,6 +1,10 @@
 import os
 
 
+app_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.abspath(os.path.join(app_dir, '..', 'data'))
+
+
 class WordGenerator(object):
     def valid_line(self, line):
         if line.startswith('  '):
@@ -12,8 +16,6 @@ class WordGenerator(object):
         return word.isalnum() and not any(c.isdigit() for c in word)
 
     def iter_file_paths(self):
-        app_dir = os.path.dirname(os.path.abspath(__file__))
-        data_dir = os.path.abspath(os.path.join(app_dir, '..', 'data'))
         wordnet_dir = os.path.join(data_dir, 'wordnet')
         for fn in os.listdir(wordnet_dir):
             yield os.path.join(wordnet_dir, fn)
