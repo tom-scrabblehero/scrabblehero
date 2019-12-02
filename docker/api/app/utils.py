@@ -4,6 +4,35 @@ import os
 app_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.abspath(os.path.join(app_dir, '..', 'data'))
 
+letter_points = {
+    'a': 1,
+    'b': 3,
+    'c': 3,
+    'd': 2,
+    'e': 1,
+    'f': 4,
+    'g': 2,
+    'h': 4,
+    'i': 1,
+    'j': 8,
+    'k': 5,
+    'l': 1,
+    'm': 3,
+    'n': 1,
+    'o': 1,
+    'p': 3,
+    'q': 10,
+    'r': 1,
+    's': 1,
+    't': 1,
+    'u': 1,
+    'v': 4,
+    'w': 4,
+    'x': 8,
+    'y': 4,
+    'z': 10
+}
+
 
 class WordGenerator(object):
     def valid_line(self, line):
@@ -14,6 +43,9 @@ class WordGenerator(object):
 
     def valid_word(self, word):
         return word.isalnum() and not any(c.isdigit() for c in word)
+
+    def score_word(self, word):
+        return sum(letter_points.get(c) for c in word)
 
     def iter_file_paths(self):
         wordnet_dir = os.path.join(data_dir, 'wordnet')
@@ -35,4 +67,4 @@ class WordGenerator(object):
 
     def generate_words(self):
         unique_words = list(sorted(set(self.iter_words())))
-        return [{"value": w} for w in unique_words]
+        return [{"value": w, "score": self.score_word(w)} for w in unique_words]
