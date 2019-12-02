@@ -1,11 +1,16 @@
 <template>
-  <div>
-  <form @submit.prevent="checkValue">
-  <h2 class="text-primary">{{ value }}</h2>
-  <input type="text" placeholder="Search a word" ref="search" autofocus=true>
-  <input type="submit" value="Submit">
-  <p>{{ result }}</p>
-  </form>
+  <div class="row">
+    <div class="col-md-12">
+    <b-form @submit.prevent="checkValue">
+    <b-alert :show="result.show" :variant="result.variant">{{ result.value }}</b-alert>
+    <b-form-group>
+      <b-form-input v-model="form.search" type="text" placeholder="Enter a word" required auto-focus="true"></b-form-input>
+    </b-form-group>
+    <b-form-group>
+      <b-button block variant="primary" type="submit" value="Submit">Check word</b-button>
+    </b-form-group>
+    </b-form>
+    </div>
   </div>
 </template>
 
@@ -17,22 +22,34 @@ export default {
   },
   data: function() {
     return {
-      result: ""
+      form: {
+        search: ""
+      },
+      result: {
+        value: "",
+        show: false,
+        variant: "info"
+      }
     }
   },
   methods: {
-    checkValue: function() {
-      var search = this.$refs.search.value
+    checkValue: function(e) {
+      console.log(e)
+      console.log(this.form.search)
       var that = this
-      fetch(`${process.env.VUE_APP_API_URL}/words/${search}`).then(function(resp) {
+      fetch(`${process.env.VUE_APP_API_URL}/words/${this.form.search}`).then(function(resp) {
         resp.json().then(function() {
           var message
           if (resp.status == 200) {
             message = "is a valid word"
+            that.result.variant = "success"
           } else {
             message = "is not a valid word"
+            that.result.variant = "danger"
           }
-          that.result = `"${search}" ${message}`
+          that.result.value = that.form.search + ' ' + message
+          that.result.show = true
+
         })
       })
     }
