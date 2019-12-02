@@ -24,5 +24,11 @@ class WordResource(Resource):
         return Word.query.paginate().items
 
 
+class WordDetailResource(Resource):
+    def get(self, word):
+        return Word.query.get_or_404(word)
+
+
 api.add_resource(IndexResource, '/')
 api.add_resource(WordResource, '/words')
+api.add_resource(WordDetailResource, '/words/<word>')
