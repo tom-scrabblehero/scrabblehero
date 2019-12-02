@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from werkzeug.utils import import_string
 
 from .models import db, Word
+from .cli import seed
 
 
 migrate = Migrate(db)
@@ -30,7 +31,8 @@ def create_app(environment=None):
     migrate.init_app(app, db)
 
     app.shell_context_processor(shell_context)
-
+    app.cli.add_command(seed)
+    
     @app.route('/')
     def index():
         return "Hello world!"
