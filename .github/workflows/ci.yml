@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Start
-      run: docker-compose up --detach && docker-compose ps && docker-compose logs www
+      run: docker-compose up --detach && docker-compose exec api flask db upgrade
     - name: Test
       run: docker-compose exec -T api pytest
     - name: Deploy api
