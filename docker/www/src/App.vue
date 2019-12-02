@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SearchResult value="Search a word"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SearchResult from './components/SearchResult.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    SearchResult
+  },
+  created: function() {
+    console.log(process.env);
   }
 }
 </script>
