@@ -2,9 +2,20 @@ import os
 
 from flask import Flask
 from flask_cors import CORS
+from flask_migrate import Migrate
 from werkzeug.utils import import_string
 
-from .models import db
+from .models import db, Word
+
+
+migrate = Migrate(db)
+
+
+def shell_context():
+    return {
+        'db': db,
+        'Word': Word
+    }
 
 
 def create_app(environment=None):
@@ -16,6 +27,9 @@ def create_app(environment=None):
 
     CORS(app)
     db.init_app(app)
+    migrate.init_app(app, db)
+
+    app.shell_context_processor(shell_context)
 
     @app.route('/')
     def index():
