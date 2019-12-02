@@ -36,16 +36,16 @@ export default {
     checkValue: function(e) {
       var that = this
       fetch(`${process.env.VUE_APP_API_URL}/words/${this.form.search}`).then(function(resp) {
-        resp.json().then(function() {
+        resp.json().then(function(data) {
           var message
           if (resp.status == 200) {
-            message = "is a valid word"
+            message = `is a valid word worth ${data.score} points`
             that.result.variant = "success"
           } else {
             message = "is not a valid word"
             that.result.variant = "danger"
           }
-          that.result.value = that.form.search + ' ' + message
+          that.result.value = `${that.form.search} ${message}`
           that.result.show = true
         })
       })
