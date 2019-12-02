@@ -6,6 +6,12 @@ Start the docker services.
 docker-compose up -d
 ```
 
+Seed the database.
+
+```
+docker-compose exec api flask seed words
+```
+
 ## Testing
 
 Run the tests.

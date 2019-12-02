@@ -10,6 +10,8 @@ jobs:
       uses: actions/checkout@v1
     - name: Start
       run: docker-compose up --detach && docker-compose exec -T api flask db upgrade
+    - name: Seed
+      run: docker-compose exec -T api flask seed words
     - name: Test
       run: docker-compose exec -T api pytest
     - name: Deploy api
