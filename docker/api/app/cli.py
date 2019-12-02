@@ -9,6 +9,10 @@ from .models import db, Word
 seed = AppGroup('seed', help="Commands to seed the database")
 
 
+# This is very slow on production because it seems impossible to get SQLAlchemy
+# to issue multiple INSERT commands in a single query. I think we need an
+# alternative method for bulk inserting objects. One idea is to use pgcopy
+# and send a csv
 @seed.command()
 def words():
     """
