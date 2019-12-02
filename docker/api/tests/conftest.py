@@ -4,7 +4,7 @@ import sqlalchemy
 
 from app import create_app
 from app.models import db as _db, Word
-
+from app.utils import WordGenerator
 
 
 @pytest.fixture(scope='session')
@@ -52,7 +52,9 @@ def client(db, app):
 
 @pytest.fixture()
 def word(client, db):
-    _word = Word(value="scrabble")
+    value = "scrabble"
+    score = WordGenerator().score_word(value)
+    _word = Word(value=value, score=score)
     db.session.add(_word)
     db.session.commit()
     return _word

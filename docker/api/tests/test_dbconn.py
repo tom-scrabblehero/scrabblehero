@@ -7,7 +7,7 @@ from app.models import db, Word
 
 
 @pytest.fixture
-def mockword():
+def mockword_value():
     return "Testing!"
 
 
@@ -28,12 +28,12 @@ def test_connection_with_db(db):
     assert type(db.engine.table_names()) == list
 
 
-def test_transactions_are_isolated_first_txn(db, mockword):
-    word = Word(value=mockword)
+def test_transactions_are_isolated_first_txn(db, mockword_value):
+    word = Word(value=mockword_value, score=10)
     db.session.add(word)
     db.session.commit()
-    assert Word.query.get(mockword) is not None
+    assert Word.query.get(mockword_value) is not None
 
 
-def test_transactions_are_isolated_second_txn(db, mockword):
-    assert Word.query.get(mockword) is None
+def test_transactions_are_isolated_second_txn(db, mockword_value):
+    assert Word.query.get(mockword_value) is None
