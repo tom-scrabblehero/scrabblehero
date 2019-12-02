@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6 offset-md-3">
     <b-form @submit.prevent="checkValue">
     <b-alert :show="result.show" :variant="result.variant">{{ result.value }}</b-alert>
     <b-form-group>
