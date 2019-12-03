@@ -25,11 +25,11 @@ def create_app(environment=None):
     environment = environment or os.environ['FLASK_ENV']
     config = import_string(f"app.config.{environment.capitalize()}Config")
 
+    gunicorn_logger = logging.getLogger("gunicorn.error")
     app = Flask(__name__)
     app.config.from_object(config)
 
     if not app.debug:
-        gunicorn_logger = logging.getLogger("gunicorn.error")
         app.logger.handlers = gunicorn_logger.handlers
         app.logger.setLevel(gunicorn_logger.level)
 
