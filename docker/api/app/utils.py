@@ -1,5 +1,7 @@
 import os
 import datetime as dt
+import string
+import itertools
 
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
@@ -82,3 +84,7 @@ class WordGenerator(object):
             return [(w['created_at'], w['updated_at'], w['value'], w['score']) for w in result]
         else:
             return result
+
+    def generate_character_pairs(self):
+        pairs = [a + b for a,b in itertools.product(string.ascii_lowercase, string.ascii_lowercase)]
+        return list(zip(pairs[:-1], pairs[1:]))

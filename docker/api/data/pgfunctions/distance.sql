@@ -2,7 +2,7 @@
 -- of letters is actually draw (assuming nothing about what has been played).
 -- That involes some N choose K logic which I've forgotten.
 
-CREATE FUNCTION score (word varchar)
+CREATE FUNCTION distance (word varchar, other varchar)
   RETURNS float
 AS $$
   var frequencies = {
@@ -34,11 +34,29 @@ AS $$
     'z': 1
   };
 
-  val = 0;
   total = 98;
-  for (char of word) {
-    val += (frequencies[char] || 0);
+
+  wordcopy = word;
+
+  // Remove characters that the words have in common
+  for (char of wordcopy) {
+    if (other.includes(char)) {
+      other = other.replace(char, '')
+      word = word.replace(char, '')
+    }
   };
 
-  return val / total;
+  // Letters that are more rare raise the distance between words. This should
+  // be improved to use the relative probability of the letters appearing
+
+  distance = 0;;
+  for (char of other) {
+    freq = frequencies[char]
+    if (freq) {
+      f = 1 / (freq / total)
+      distance += f
+    }
+  }
+
+  return distance;
 $$ LANGUAGE plv8
