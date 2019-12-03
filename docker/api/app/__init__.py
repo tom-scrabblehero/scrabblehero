@@ -1,4 +1,5 @@
 import os
+import logging
 
 from flask import Flask
 from flask_cors import CORS
@@ -26,6 +27,11 @@ def create_app(environment=None):
 
     app = Flask(__name__)
     app.config.from_object(config)
+
+    if not app.debug:
+        gunicorn_logger = logging.getLogger("gunicorn.error")
+        app.logger.handlers = gunicorn_logger.handlers
+        app.logger.setLevel(gunicorn_logger.level)
 
     CORS(app)
     db.init_app(app)
