@@ -1,6 +1,9 @@
 build:
   docker:
     web: docker/api/Dockerfile
+run:
+  web:
+    command: gunicorn 'app:create_app()' --workers 4 --bind 0.0.0.0:$PORT --log-level INFO    
 release:
   image: web
   command:
