@@ -1,4 +1,5 @@
 import os
+import datetime as dt
 
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
@@ -65,6 +66,19 @@ class WordGenerator(object):
                 if self.valid_word(word):
                     yield word
 
-    def generate_words(self):
+    def generate_words(self, as_tuples=False):
+        now = dt.datetime.now()
         unique_words = list(sorted(set(self.iter_words())))
-        return [{"value": w, "score": self.score_word(w)} for w in unique_words]
+        result = [
+            {
+                "value": w,
+                "score": self.score_word(w),
+                "created_at": now,
+                "updated_at": now
+            } for w in unique_words
+        ]
+
+        if as_tuples:
+            return [(w['created_at'], w['updated_at'], w['value'], w['score']) for w in result]
+        else:
+            return result
