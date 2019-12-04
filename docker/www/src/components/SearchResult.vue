@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
     <b-form @submit.prevent="checkValue">
-    <b-alert :show="result.show" :variant="result.variant">{{ result.value }}</b-alert>
     <b-form-group>
       <b-form-input v-model="form.search" type="text" placeholder="Enter a word" required auto-focus="true"></b-form-input>
     </b-form-group>
@@ -10,6 +9,7 @@
       <b-button block variant="primary" type="submit" value="Submit">Check word</b-button>
     </b-form-group>
     </b-form>
+    <b-alert :show="result.show" :variant="result.variant">{{ result.value }}</b-alert>
     </div>
   </div>
 </template>
