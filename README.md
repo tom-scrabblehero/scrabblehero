@@ -1,3 +1,7 @@
+# http://scrabblhero.com
+
+A scrabble word recommendation engine.
+
 ## Set up
 
 Start the docker services.
