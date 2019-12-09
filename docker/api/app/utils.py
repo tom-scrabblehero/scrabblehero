@@ -3,38 +3,14 @@ import datetime as dt
 import string
 import itertools
 
+from yaml import Loader as YamlLoader, load as load_yaml
+
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.abspath(os.path.join(app_dir, '..', 'data'))
+scrabble_yml = os.path.join(data_dir, 'scrabble.yml')
 
-letter_points = {
-    'a': 1,
-    'b': 3,
-    'c': 3,
-    'd': 2,
-    'e': 1,
-    'f': 4,
-    'g': 2,
-    'h': 4,
-    'i': 1,
-    'j': 8,
-    'k': 5,
-    'l': 1,
-    'm': 3,
-    'n': 1,
-    'o': 1,
-    'p': 3,
-    'q': 10,
-    'r': 1,
-    's': 1,
-    't': 1,
-    'u': 1,
-    'v': 4,
-    'w': 4,
-    'x': 8,
-    'y': 4,
-    'z': 10
-}
+scrabble = load_yaml(open(scrabble_yml, 'r').read(), Loader=YamlLoader)
 
 
 class WordGenerator(object):
@@ -45,10 +21,7 @@ class WordGenerator(object):
             return True
 
     def valid_word(self, word):
-        return word.isalnum() and not any(c.isdigit() for c in word)
-
-    def score_word(self, word):
-        return sum(letter_points.get(c) for c in word)
+        return word.isalnum() and not any(c.isdigit() for c in word) and len(word) > 1
 
     def iter_file_paths(self):
         wordnet_dir = os.path.join(data_dir, 'wordnet')
@@ -68,23 +41,6 @@ class WordGenerator(object):
                 if self.valid_word(word):
                     yield word
 
-    def generate_words(self, as_tuples=False):
-        now = dt.datetime.now()
-        unique_words = list(sorted(set(self.iter_words())))
-        result = [
-            {
-                "value": w,
-                "score": self.score_word(w),
-                "created_at": now,
-                "updated_at": now
-            } for w in unique_words
-        ]
-
-        if as_tuples:
-            return [(w['created_at'], w['updated_at'], w['value'], w['score']) for w in result]
-        else:
-            return result
-
-    def generate_character_pairs(self):
-        pairs = [a + b for a,b in itertools.product(string.ascii_lowercase, string.ascii_lowercase)]
-        return list(zip(pairs[:-1], pairs[1:]))
+    def __iter__(self):
+        for word in list(set(self.iter_words())):
+            yield word

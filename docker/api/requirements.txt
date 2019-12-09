@@ -8,5 +8,6 @@ flask-restful==0.3.7
 
 gunicorn==19.9
 psycopg2-binary
+pyyaml==5.2
 
 pytest==5.3
