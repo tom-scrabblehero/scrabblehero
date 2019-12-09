@@ -1,7 +1,7 @@
 """Init db
 
 Revision ID: 9f35579719c1
-Revises: 
+Revises:
 Create Date: 2019-12-09 01:02:53.250159
 
 """
@@ -23,7 +23,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('score', sa.Integer(), nullable=False),
-    sa.Column('anagram_hash', sa.Integer(), nullable=False),
+    sa.Column('anagram_hash', sa.BigInteger(), nullable=False),
     sa.Column('frequency', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

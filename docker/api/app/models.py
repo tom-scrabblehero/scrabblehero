@@ -28,7 +28,7 @@ class Word(db.Model, TimestampMixin):
 
     id = db.Column(db.String(), primary_key=True)
     score = db.Column(db.Integer(), nullable=False)
-    anagram_hash = db.Column(db.Integer(), nullable=False)
+    anagram_hash = db.Column(db.BigInteger(), nullable=False)
     frequency = db.Column(db.Float(), nullable=False)
 
     @classmethod

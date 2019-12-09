@@ -21,7 +21,7 @@ class WordGenerator(object):
             return True
 
     def valid_word(self, word):
-        return word.isalnum() and not any(c.isdigit() for c in word) and len(word) > 1
+        return word.isalnum() and not any(c.isdigit() for c in word) and len(word) > 1 and len(word) <= 10
 
     def iter_file_paths(self):
         wordnet_dir = os.path.join(data_dir, 'wordnet')
