@@ -29,7 +29,7 @@ def test_connection_with_db(db):
 
 
 def test_transactions_are_isolated_first_txn(db, mockword_value):
-    word = Word(value=mockword_value, score=10)
+    word = Word(id=mockword_value)
     db.session.add(word)
     db.session.commit()
     assert Word.query.get(mockword_value) is not None
