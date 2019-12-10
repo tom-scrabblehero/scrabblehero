@@ -52,7 +52,16 @@ class Word(db.Model, TimestampMixin):
         return reduce(mul, character_hashes, 1)
 
     def calculate_frequency(self):
-        return 0.5
+        frequency = 1
+        letters = scrabble['frequencies'].copy()
+        total_letters = sum(x - 2 for x in letters.values())  # minus 2 because of the blanks
+        for position, char in enumerate(self.id):
+            bag_size = total_letters - position
+            appearances = letters[char]
+            if appearances > 0:
+                letters[char] -= 1
+            frequency *= (appearances / bag_size)
+        return frequency
 
     def ordered_data(self):
         return OrderedDict(sorted(asdict(self).items()))
