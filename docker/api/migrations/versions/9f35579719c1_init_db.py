@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('score', sa.Integer(), nullable=False),
+    sa.Column('length', sa.Integer(), nullable=False),
     sa.Column('anagram_hash', sa.BigInteger(), nullable=False),
     sa.Column('frequency', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id')
