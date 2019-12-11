@@ -1,0 +1,2 @@
+FROM scrabblehero_api
+CMD flask db upgrade

@@ -19,7 +19,14 @@ jobs:
       env:
         HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
         HEROKU_APP_NAME: scrabble-hero-production
-      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
+      run: |
+        docker tag scrabblehero_api registry.heroku.com/scrabble-hero-production/web
+        docker tag scrabblehero_release registry.heroku.com/scrabble-hero-production/release
+        docker login --username=_ --password=$HEROKU_API_TOKEN registry.heroku.com
+        docker push registry.heroku.com/scrabble-hero-production/web
+        docker push registry.heroku.com/scrabble-hero-production/release
+        heroku container:release web release
+
     - name: Build
       if: github.ref == 'refs/heads/master' && job.status == 'success'
       run: docker-compose exec -T www npm run build

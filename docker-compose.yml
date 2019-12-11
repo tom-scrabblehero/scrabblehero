@@ -21,6 +21,12 @@ services:
     environment:
       DATABASE_URL: postgresql://scrabblehero:password@postgres:5432/production
       FLASK_ENV: development
+  release:
+    build:
+      dockerfile: ./docker/api/Dockerfile.release
+      context: .
+    depends_on:
+      - api
   www:
     # TODO: update build context to use the root of this project, and allow
     # the data directory to be accessible to built containers. That's needed
