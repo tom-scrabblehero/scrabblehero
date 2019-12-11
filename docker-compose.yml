@@ -31,9 +31,12 @@ services:
     # TODO: update build context to use the root of this project, and allow
     # the data directory to be accessible to built containers. That's needed
     # for building the sitemap eventually
-    build: ./docker/www
+    build:
+      dockerfile: ./docker/www/Dockerfile
+      context: .
     volumes:
       - ./docker/www:/app
+      - ./data:/app/data
       - /app/node_modules
     ports:
       - '8080:8080'
