@@ -3,10 +3,10 @@
     <div class="col-md-6 offset-md-3">
     <b-form @submit.prevent="setSearch">
     <b-form-group>
-      <b-form-input v-model="input" type="text" :placeholder="prompt" required auto-focus="true"></b-form-input>
+      <b-form-input variant="outline-primary" v-model="input" type="text" placeholder="Enter letters or word" required auto-focus="true"></b-form-input>
     </b-form-group>
     <b-form-group>
-      <b-button block class="btn-lg" variant="outline-light" type="submit" value="Submit">{{ cta }}</b-button>
+      <b-button block class="btn-lg" variant="outline-primary" type="submit" value="Submit">{{ cta }}</b-button>
     </b-form-group>
     </b-form>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "SearchResult",
+  name: "SearchForm",
   props: {
     prompt: String,
     cta: String
@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     setSearch: function() {
+      this.$router.push({name: 'words', params: {'word': this.input}})
       this.$emit("setSearch", this.input)
     }
   }

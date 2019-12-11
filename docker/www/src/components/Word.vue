@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <Title title="Find Scrabble Words"/>
-    <SearchForm :prompt="this.$route.params.word" cta="Find words" v-on:setSearch="updateSearch"/>
-    <SearchResult :search="search"/>
+    <Title :title="this.title" />
+    <SearchForm :prompt="this.$route.params.word" cta="Search other words" v-on:setSearch="updateSearch"/>
+    <SearchResult :search="search" v-on:loadSearch="updateTitle"/>
     <SearchRecommendations :search="search"/>
   </div>
 </template>
@@ -23,13 +23,20 @@ export default {
   },
   data: function() {
     return {
-      search: ''
+      search: '',
+      title: `Checking if "${this.$route.params.word}" is valid...`
     }
   },
   methods: {
     updateSearch: function(search) {
-      console.log("Updated search")
       this.search = search
+    },
+    updateTitle: function(result) {
+      if (result.id) {
+        this.title = `"${this.$route.params.word}" is a valid scrabble word`
+      } else {
+        this.title = `"${this.$route.params.word}" is not a valid scrabble word`
+      }
     }
   },
   mounted: function() {

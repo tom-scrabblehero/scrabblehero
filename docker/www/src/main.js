@@ -24,9 +24,9 @@ class Api {
 Vue.prototype.$api = new Api(process.env.VUE_APP_API_URL)
 
 const routes = [
-  {path: '/', component: Home},
-  {path: '/contact', component: Contact},
-  {path: '/words/:word', component: Word}
+  {name: 'index', path: '/', component: Home},
+  {name: 'contact', path: '/contact', component: Contact},
+  {name: 'words', path: '/words/:word', component: Word}
 ]
 
 const router = new VueRouter({
