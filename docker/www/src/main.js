@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App.vue'
 import Home from './components/Home.vue'
+import Word from './components/Word.vue'
 import Contact from './components/Contact.vue'
 
 import './assets/styles.scss'
@@ -24,7 +25,8 @@ Vue.prototype.$api = new Api(process.env.VUE_APP_API_URL)
 
 const routes = [
   {path: '/', component: Home},
-  {path: '/contact', component: Contact}
+  {path: '/contact', component: Contact},
+  {path: '/words/:word', component: Word}
 ]
 
 const router = new VueRouter({

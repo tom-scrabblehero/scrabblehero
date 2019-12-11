@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Title title="Find Scrabble Words"/>
-    <SearchForm prompt="Enter a word or letters" cta="Find words" v-on:setSearch="test"/>
+    <SearchForm :prompt="this.$route.params.word" cta="Find words" v-on:setSearch="updateSearch"/>
     <SearchResult :search="search"/>
     <SearchRecommendations :search="search"/>
   </div>
@@ -27,9 +27,13 @@ export default {
     }
   },
   methods: {
-    test: function(search) {
+    updateSearch: function(search) {
+      console.log("Updated search")
       this.search = search
     }
+  },
+  mounted: function() {
+    this.search = this.$route.params.word
   }
 }
 </script>
