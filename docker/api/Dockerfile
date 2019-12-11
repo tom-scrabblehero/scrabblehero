@@ -6,7 +6,8 @@ ENV PORT=5000
 RUN apk add binutils libc-dev postgresql-dev gcc
 
 RUN mkdir /app
-COPY . /app
+COPY ./docker/api /app
+COPY ./data /app/data
 
 WORKDIR /app
 RUN pip install -r requirements.txt

@@ -9,7 +9,9 @@ services:
     ports:
       - '5432:5432'
   api:
-    build: ./docker/api
+    build:
+      dockerfile: ./docker/api/Dockerfile
+      context: .
     volumes:
       - ./docker/api:/app
       - ./data:/app/data
@@ -20,10 +22,12 @@ services:
       DATABASE_URL: postgresql://scrabblehero:password@postgres:5432/production
       FLASK_ENV: development
   www:
+    # TODO: update build context to use the root of this project, and allow
+    # the data directory to be accessible to built containers. That's needed
+    # for building the sitemap eventually
     build: ./docker/www
     volumes:
       - ./docker/www:/app
-      - ./data:/app/data
       - /app/node_modules
     ports:
       - '8080:8080'
