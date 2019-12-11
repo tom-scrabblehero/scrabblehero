@@ -52,7 +52,7 @@ def client(db, app):
 
 @pytest.fixture()
 def word(client, db):
-    _word = Word(id="scrabble")
+    _word = Word(id="scrabble".upper())
     db.session.add(_word)
     db.session.commit()
     return _word

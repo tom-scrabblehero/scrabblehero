@@ -16,7 +16,7 @@ seed = AppGroup('seed', help="Commands to seed the database")
 @seed.command()
 @click.option('--drop', default=False, is_flag=True, help="Drop any existing words")
 def words(drop):
-    current_app.logger.info("Seeding words")
+    current_app.logger.info("Seeding words. This usually takes ~60 seconds")
     url = sa.engine.url.make_url(current_app.config['DATABASE_URL'])
     conn = psycopg2.connect(user=url.username, password=url.password, host=url.host, dbname=url.database)
     cursor = conn.cursor()

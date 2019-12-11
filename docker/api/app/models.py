@@ -32,7 +32,7 @@ class Word(db.Model, TimestampMixin):
 
     id = db.Column(db.String(), primary_key=True)
     score = db.Column(db.Integer(), nullable=False)
-    anagram_hash = db.Column(db.BigInteger(), nullable=False)
+    anagram_hash = db.Column(db.String(), nullable=False)
     frequency = db.Column(db.Float(), nullable=False)
     length = db.Column(db.Integer(), nullable=False)
 
@@ -72,7 +72,6 @@ class Word(db.Model, TimestampMixin):
         for char in self.id:
             yield char
 
-
     def calculate_length(self):
         return len(self)
 
@@ -81,20 +80,20 @@ class Word(db.Model, TimestampMixin):
 
     def calculate_anagram_hash(self):
         character_hashes = (scrabble['hashes'].get(c, 1) for c in self.id)
-        return reduce(mul, character_hashes, 1)
+        return str(reduce(mul, character_hashes, 1))
 
     def calculate_frequency(self):
         return 0
 
     def subsets(self):
         "All unique subsets of the word"
-        for n in range(1, len(self)):
+        for n in range(1, len(self) + 1):
             for v in combinations(self.id, n):
                 yield Word(id=''.join(v))
 
     def recommendations(self):
         hashes = [w.anagram_hash for w in self.subsets()]
-        return Word.query.filter(Word.anagram_hash.in_(hashes)).all()
+        return Word.query.filter(Word.anagram_hash.in_(hashes)).order_by(Word.length.desc()).all()
 
     def ordered_data(self):
         data = asdict(self)
