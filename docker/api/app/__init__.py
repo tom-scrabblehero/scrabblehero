@@ -9,6 +9,7 @@ from werkzeug.utils import import_string
 from .models import db, Word
 from .cli import seed
 from .resources import api
+from .utils import scrabble
 
 
 migrate = Migrate(db)
@@ -17,7 +18,8 @@ migrate = Migrate(db)
 def shell_context():
     return {
         'db': db,
-        'Word': Word
+        'Word': Word,
+        'scrabble': scrabble
     }
 
 

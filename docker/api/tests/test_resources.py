@@ -10,14 +10,14 @@ def test_words_index(client, word):
     resp = client.get('/words')
     assert resp.status_code == 200
     assert type(resp.json) == list
-    assert resp.json[0].get('value') == word.value
+    assert resp.json[0].get('id') == word.id
 
 
 def test_words_detail(client, word):
-    resp = client.get(f'/words/{word.value}')
+    resp = client.get(f'/words/{word.id}')
     assert resp.status_code == 200
     assert type(resp.json) == dict
-    assert resp.json['value'] == word.value
+    assert resp.json['id'] == word.id
 
     resp = client.get(f'/words/doesnotexist')
     assert resp.status_code == 404

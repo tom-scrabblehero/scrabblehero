@@ -29,6 +29,12 @@ class WordDetailResource(Resource):
         return Word.query.get_or_404(word)
 
 
+class WordRecommendationsResource(Resource):
+    def get(self, word):
+        return Word(word).recommendations()
+
+
 api.add_resource(IndexResource, '/')
 api.add_resource(WordResource, '/words')
 api.add_resource(WordDetailResource, '/words/<word>')
+api.add_resource(WordRecommendationsResource, '/words/<word>/recommendations')
