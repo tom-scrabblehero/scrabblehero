@@ -26,12 +26,12 @@ class WordResource(Resource):
 
 class WordDetailResource(Resource):
     def get(self, word):
-        return Word.query.get_or_404(word)
+        return Word.query.get_or_404(word.upper())
 
 
 class WordRecommendationsResource(Resource):
     def get(self, word):
-        return Word(word).recommendations()
+        return Word(word.upper()).recommendations()
 
 
 api.add_resource(IndexResource, '/')
