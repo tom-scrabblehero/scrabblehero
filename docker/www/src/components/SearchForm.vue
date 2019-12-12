@@ -6,7 +6,7 @@
       <b-form-input v-model="input" required variant="outline-primary" type="text" placeholder="Enter letters or word" auto-focus="true"></b-form-input>
     </b-form-group>
     <b-form-group>
-      <b-button block class="btn-lg" variant="outline-primary" type="submit" value="Submit">{{ cta }}</b-button>
+      <b-button block class="btn-lg" variant="primary" type="submit" value="Submit">{{ cta }}</b-button>
     </b-form-group>
     </b-form>
     </div>
