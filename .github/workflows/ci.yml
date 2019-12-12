@@ -25,7 +25,7 @@ jobs:
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
         docker push registry.heroku.com/scrabble-hero-production/web
         docker push registry.heroku.com/scrabble-hero-production/release
-        heroku container:release --app scrabble-hero-production web release
+        heroku container:release --app $HEROKU_APP_NAME web release
     - name: Build
       if: github.ref == 'refs/heads/master' && job.status == 'success'
       run: docker-compose exec -T www npm run build
