@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Title :title="this.$route.params.word" />
-    <SearchForm cta="Search other words" />
+    <Title v-if="loaded" :title="title" />
+    <SearchForm v-if="loaded" cta="Search other words" />
     <SearchResult v-if="loaded" :status_code="status_code" :word="word" />
     <SearchRecommendations v-if="loaded" :words="recommendations" title="Similar words"/>
   </div>
@@ -42,6 +42,13 @@ export default {
   computed: {
     loaded: function() {
       return (this.recommendations) != null && (this.word != null)
+    },
+    title: function() {
+      if (this.status_code == 200) {
+        return `"${this.$route.params.word.toUpperCase()}" is a valid scrabble word`
+      } else {
+        return `"${this.$route.params.word.toUpperCase()}" is not a valid scrabble word`
+      }
     }
   },
   mounted: function() {
