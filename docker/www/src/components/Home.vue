@@ -4,7 +4,7 @@
     <SearchForm prompt="Enter a word or letters" cta="Find words" v-on:setSearch="test"/>
     <div class="row mt-4 text-center">
       <div class="col-md-6 offset-md-3">
-        <h2 class="text-info">Improve your Scrabble and "Words With Friends" skills with our free tools</h2>
+        <h2 class="text-info">Improve your Scrabble and "Words With Friends" skills with our free resources and tools</h2>
       </div>
     </div>
     <div class="row mt-4">
