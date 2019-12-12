@@ -32,9 +32,9 @@ class Word(db.Model, TimestampMixin):
 
     id = db.Column(db.String(), primary_key=True)
     score = db.Column(db.Integer(), nullable=False)
-    anagram_hash = db.Column(db.String(), nullable=False)
+    anagram_hash = db.Column(db.String(), nullable=False, index=True)
     frequency = db.Column(db.Float(), nullable=False)
-    length = db.Column(db.Integer(), nullable=False)
+    length = db.Column(db.Integer(), nullable=False, index=True)
 
     @classmethod
     def ordered_columns(klass):
