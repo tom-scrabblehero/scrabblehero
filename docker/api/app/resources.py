@@ -9,7 +9,11 @@ api = Api()
 
 @api.representation('application/json')
 def output_json(data, code, headers=None):
-    resp = make_response(json.dumps(data, indent=2), code)
+    result = {
+        'data': data,
+        'status_code': code
+    }
+    resp = make_response(json.dumps(result, indent=2), code)
     resp.headers.extend(headers or {})
     return resp
 
@@ -34,7 +38,13 @@ class WordRecommendationsResource(Resource):
         return Word(word.upper()).recommendations()
 
 
+class TwoLetterWordsResource(Resource):
+    def get(self):
+        return Word.query.filter(Word.length==2).all()
+
+
 api.add_resource(IndexResource, '/')
 api.add_resource(WordResource, '/words')
 api.add_resource(WordDetailResource, '/words/<word>')
 api.add_resource(WordRecommendationsResource, '/words/<word>/recommendations')
+api.add_resource(TwoLetterWordsResource, '/two-letter-words')

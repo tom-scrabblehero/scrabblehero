@@ -7,6 +7,7 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import Word from './components/Word.vue'
 import Contact from './components/Contact.vue'
+import TwoLetterWords from './components/TwoLetterWords.vue'
 
 import './assets/styles.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -24,7 +25,8 @@ class Api {
 const routes = [
   {name: 'index', path: '/', component: Home},
   {name: 'contact', path: '/contact', component: Contact},
-  {name: 'words', path: '/words/:word', component: Word}
+  {name: 'words', path: '/words/:word', component: Word},
+  {name: 'two-letter-words', path: '/two-letter-words', component: TwoLetterWords},
 ]
 
 const router = new VueRouter({

@@ -1,46 +1,63 @@
 <template>
   <div class="container">
-    <Title :title="this.title" />
-    <SearchForm :prompt="this.$route.params.word" cta="Search other words" v-on:setSearch="updateSearch"/>
-    <SearchResult :search="search" v-on:loadSearch="updateTitle"/>
-    <SearchRecommendations :search="search"/>
+    <Title v-if="loaded" :title="title" />
+    <SearchForm v-if="loaded" cta="Search other words" />
+    <SearchResult v-if="loaded" :status_code="status_code" :word="word" />
+    <SearchRecommendations v-if="loaded" :words="recommendations" title="Similar words"/>
   </div>
 </template>
 
 <script>
 import SearchForm from './SearchForm.vue'
+import Title from './Title.vue'
 import SearchResult from './SearchResult.vue'
 import SearchRecommendations from './SearchRecommendations.vue'
-import Title from './Title.vue'
 
 export default {
-  name: 'app',
+  name: 'word',
   components: {
-    SearchForm,
-    Title,
     SearchResult,
-    SearchRecommendations
+    SearchForm,
+    SearchRecommendations,
+    Title
   },
   data: function() {
     return {
-      search: '',
-      title: `Checking if "${this.$route.params.word}" is valid...`
+      word: null,
+      recommendations: [],
+      status_code: null
     }
   },
   methods: {
-    updateSearch: function(search) {
-      this.search = search
+    update: function() {
+      this.$api.get(`/words/${this.$route.params.word}`).then(data => {
+        this.word = data.data;
+        this.status_code = data.status_code;
+      })
+      this.$api.get(`/words/${this.$route.params.word}/recommendations`).then(data => {
+        this.recommendations = data.data
+      })
+    }
+  },
+  computed: {
+    loaded: function() {
+      return (this.recommendations) != null && (this.word != null)
     },
-    updateTitle: function(result) {
-      if (result.id) {
-        this.title = `"${this.$route.params.word}" is a valid scrabble word`
+    title: function() {
+      if (this.status_code == 200) {
+        return `"${this.$route.params.word.toUpperCase()}" is a valid scrabble word`
       } else {
-        this.title = `"${this.$route.params.word}" is not a valid scrabble word`
+        return `"${this.$route.params.word.toUpperCase()}" is not a valid scrabble word`
       }
     }
   },
   mounted: function() {
-    this.search = this.$route.params.word
+    this.update()
+  },
+  watch: {
+    $route: function(to, from) {
+      this.update()
+    }
   }
 }
 </script>
