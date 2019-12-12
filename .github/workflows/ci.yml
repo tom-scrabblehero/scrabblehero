@@ -17,7 +17,7 @@ jobs:
     - name: Deploy api
       if: github.ref == 'refs/heads/master' && job.status == 'success'
       env:
-        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: scrabble-hero-production
       run: |
         docker tag scrabblehero_api registry.heroku.com/scrabble-hero-production/web
@@ -26,7 +26,6 @@ jobs:
         docker push registry.heroku.com/scrabble-hero-production/web
         docker push registry.heroku.com/scrabble-hero-production/release
         heroku container:release --app scrabble-hero-production web release
-
     - name: Build
       if: github.ref == 'refs/heads/master' && job.status == 'success'
       run: docker-compose exec -T www npm run build
