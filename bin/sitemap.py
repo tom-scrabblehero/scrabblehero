@@ -14,14 +14,14 @@ sitemap_words_dir = 'data/sitemap/words'
 url_string = 'https://www.scrabblehero.com/words/{word}\n'
 sitemap_string = sitemap_dir + '/words/{sitemap_number}.txt'
 
-sh.rm('-r', '-f', sitemap_dir)
+sh.rm('-r', '-f', sitemap_words_dir)
 os.makedirs(sitemap_words_dir, exist_ok=True)
 
 words = open('data/words.txt', 'r').readlines()
 sitemap_fh = open(sitemap_string.format(sitemap_number=0), 'w')
 for n, word in enumerate(words):
     word = word.strip()
-    sitemap_number = math.floor(n / 50000)
+    sitemap_number = math.floor(n / 25000)
     sitemap_filename = sitemap_string.format(sitemap_number=sitemap_number)
     if not os.path.exists(sitemap_filename):
         sitemap_fh.close()
