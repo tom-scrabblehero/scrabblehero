@@ -17,6 +17,8 @@
 </template>
 
 <script>
+// TODO: we shouldn't have these components fetch their data, instead the
+// parent should pass in data via props
 export default {
 	name: 'SearchRecommendations',
 	props: {
