@@ -9,7 +9,11 @@ api = Api()
 
 @api.representation('application/json')
 def output_json(data, code, headers=None):
-    resp = make_response(json.dumps(data, indent=2), code)
+    result = {
+        'data': data,
+        'status_code': code
+    }
+    resp = make_response(json.dumps(result, indent=2), code)
     resp.headers.extend(headers or {})
     return resp
 
