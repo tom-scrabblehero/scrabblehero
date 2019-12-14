@@ -49,5 +49,3 @@ const app = new Vue({
 }).$mount('#app')
 
 window.app = app
-
-console.log(process.env)
