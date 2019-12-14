@@ -8,6 +8,8 @@ import Home from './components/Home.vue'
 import Word from './components/Word.vue'
 import Contact from './components/Contact.vue'
 import TwoLetterWords from './components/TwoLetterWords.vue'
+import WordsStartingWith from './components/WordsStartingWith.vue'
+
 
 import './assets/styles.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -27,6 +29,7 @@ const routes = [
   {name: 'contact', path: '/contact', component: Contact},
   {name: 'words', path: '/words/:word', component: Word},
   {name: 'two-letter-words', path: '/two-letter-words', component: TwoLetterWords},
+  {name: 'words-starting-with', path: '/words/starting-with/:letters', component: WordsStartingWith},
 ]
 
 const router = new VueRouter({

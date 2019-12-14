@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Title v-if="loaded" :title="title" />
-    <SearchForm v-if="loaded" cta="Search other words" />
+    <SearchForm v-if="loaded" cta="Search other words" @search="search"/>
     <SearchResult v-if="loaded" :status_code="status_code" :word="word" />
     <SearchRecommendations v-if="loaded" :words="recommendations" title="Similar words"/>
   </div>
@@ -37,6 +37,9 @@ export default {
       this.$api.get(`/words/${this.$route.params.word}/recommendations`).then(data => {
         this.recommendations = data.data
       })
+    },
+    search: function(input) {
+      this.$router.push({name: 'words', params: {'word': input}})
     }
   },
   computed: {
