@@ -16,7 +16,7 @@ scrabble = load_yaml(open(scrabble_yml, 'r').read(), Loader=YamlLoader)
 class WordGenerator(object):
 
     def parse(self, line):
-        word, definition = line.split(' ', maxsplit=1)
+        word, definition = line.split('\t', maxsplit=1)
         return {
             'id': word,
             'definition': definition
