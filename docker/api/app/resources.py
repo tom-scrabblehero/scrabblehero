@@ -43,8 +43,41 @@ class TwoLetterWordsResource(Resource):
         return Word.query.filter(Word.length==2).all()
 
 
+class WordsStartingWithResource(Resource):
+    def get(self, letters):
+        letters = letters.upper()
+        return Word.query.filter(Word.id.like(f"{letters}%")).paginate().items
+
+
+class WordsEndingWithResource(Resource):
+    def get(self, letters):
+        letters = letters.upper()
+        return Word.query.filter(Word.id.like(f"%{letters}")).paginate().items
+
+
+class WordsContainingResource(Resource):
+    def get(self, letters):
+        letters = letters.upper()
+        return Word.query.filter(Word.id.like(f"%{letters}%")).paginate().items
+
+
+class VowelWordsResource(Resource):
+    def get(self):
+        return Word.query.filter(Word.vowels_length > 4).filter(Word.consonants_length < 4).paginate().items
+
+
+class ConsonantWordsResource(Resource):
+    def get(self):
+        return Word.query.filter(Word.vowels_length < 4).filter(Word.consonants_length > 4).paginate().items
+
+
 api.add_resource(IndexResource, '/')
 api.add_resource(WordResource, '/words')
 api.add_resource(WordDetailResource, '/words/<word>')
 api.add_resource(WordRecommendationsResource, '/words/<word>/recommendations')
 api.add_resource(TwoLetterWordsResource, '/two-letter-words')
+api.add_resource(WordsStartingWithResource, '/words/starting-with/<letters>')
+api.add_resource(WordsEndingWithResource, '/words/ending-with/<letters>')
+api.add_resource(WordsContainingResource, '/words/containing/<letters>')
+api.add_resource(VowelWordsResource, '/vowel-words')
+api.add_resource(ConsonantWordsResource, '/consonant-words')
