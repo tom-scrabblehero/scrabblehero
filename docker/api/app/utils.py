@@ -14,10 +14,19 @@ scrabble = load_yaml(open(scrabble_yml, 'r').read(), Loader=YamlLoader)
 
 
 class WordGenerator(object):
-    def clean(self, word):
-        return word.replace('+', '').strip().upper()
+
+    def parse(self, line):
+        word, definition = line.split('\t', maxsplit=1)
+        return {
+            'id': word,
+            'definition': definition.strip()
+        }
+
+    def readlines(self):
+        with open(os.path.join(data_dir, 'words.txt'), 'r') as wf:
+            for line in wf.readlines():
+                yield line
 
     def __iter__(self):
-        with open(os.path.join(data_dir, 'words.txt'), 'r') as wf:
-            for word in wf.readlines():
-                yield self.clean(word)
+        for line in self.readlines():
+            yield self.parse(line)
