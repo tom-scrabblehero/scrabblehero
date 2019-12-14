@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     setSearch: function() {
-      this.$router.push({name: 'words', params: {'word': this.input}})
+      this.$emit('search', this.input)
     }
   }
 }
