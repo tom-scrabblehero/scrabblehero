@@ -11,6 +11,7 @@ def test_words_index(client, word):
     assert resp.status_code == 200
     assert type(resp.json['data']) == list
     assert resp.json['data'][0].get('id') == word.id
+    assert resp.json['data'][0].get('definition') == word.definition
 
 
 def test_words_detail(client, word):
@@ -18,6 +19,7 @@ def test_words_detail(client, word):
     assert resp.status_code == 200
     assert type(resp.json) == dict
     assert resp.json['data']['id'] == word.id
+    assert resp.json['data']['definition'] == word.definition
 
     resp = client.get(f'/words/doesnotexist')
     assert resp.status_code == 404
