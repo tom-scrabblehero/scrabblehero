@@ -1,4 +1,4 @@
-# http://scrabblehero.com
+# https://scrabblehero.com
 
 A scrabble word recommendation engine.
 
