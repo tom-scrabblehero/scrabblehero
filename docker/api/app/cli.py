@@ -29,7 +29,7 @@ def words(drop):
         current_app.logger.info("Retaining existing words")
 
     current_app.logger.info("Calculating word parameters")
-    words = [tuple(Word(id=w).ordered_data().values()) for w in WordGenerator()]
+    words = [tuple(Word(**w).ordered_data().values()) for w in WordGenerator()]
 
     current_app.logger.info("Starting insert")
     execute_values(cursor, query, words, page_size=10000)
