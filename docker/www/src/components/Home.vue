@@ -9,6 +9,7 @@
     </div>
     <div class="row mt-4">
       <ThreeUp title="Two letter words" cta="Learn more" text="All valid two letter word combinations. No need to memorize them all, just bookmark this page!" url="/two-letter-words"/>
+      <ThreeUp title="Words starting with..." cta="Learn more" text="Find words that start with the letters from your hand" url="/words/starting-with/AA"/>
     </div>
   </div>
 </template>
