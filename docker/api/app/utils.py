@@ -19,7 +19,7 @@ class WordGenerator(object):
         word, definition = line.split('\t', maxsplit=1)
         return {
             'id': word,
-            'definition': definition
+            'definition': definition.strip()
         }
 
     def readlines(self):
