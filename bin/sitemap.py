@@ -1,5 +1,8 @@
 #!/usr/local/bin/python3
 
+# TODO: use the utils.WordGenerator class for building the sitemap and move
+# this into a flask CLI command
+
 """
 Constructs a sitemap from the data in /data/words.txt. Require python3.6+
 """
