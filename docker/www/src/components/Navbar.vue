@@ -5,8 +5,9 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item href="/two-letter-words">Two Letter Words</b-nav-item>
-        <b-nav-item href="/words/starting-with/aa">Words Starting With</b-nav-item>
-        <b-nav-item href="/words/ending-with/ing">Words Ending With </b-nav-item>
+        <b-nav-item href="/words/starting-with/AA">Words Starting With</b-nav-item>
+        <b-nav-item href="/words/ending-with/ING">Words Ending With </b-nav-item>
+        <b-nav-item href="/words/containing/AZ">Words Containing </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Title v-if="loaded" :title="`Words starting with ${ this.$route.params.letters.toUpperCase() }`" />
+    <Title v-if="loaded" :title="`Words containing ${ this.$route.params.letters.toUpperCase() }`" />
     <SearchForm v-if="loaded" cta="Search" @search="search" />
     <SearchRecommendations v-if="loaded" :words="words" />
   </div>
@@ -14,7 +14,7 @@ import SearchForm from './SearchForm.vue'
 
 
 export default {
-  name: 'words-starting-with',
+  name: 'words-containing',
   data: function() {
     return {
       words: null
@@ -32,10 +32,10 @@ export default {
   },
   methods: {
     update: function() {
-      this.$api.get(`/words/starting-with/${this.$route.params.letters}`).then(data => this.words = data.data)
+      this.$api.get(`/words/containing/${this.$route.params.letters}`).then(data => this.words = data.data)
     },
     search: function(letters) {
-      this.$router.push({name: 'words-starting-with', params: {'letters': letters}})
+      this.$router.push({name: 'words-containg', params: {'letters': letters}})
     }
   },
   mounted: function() {

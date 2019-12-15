@@ -11,6 +11,7 @@
       <ThreeUp title="Two letter words" cta="Learn more" text="All valid two letter word combinations. No need to memorize them all, just bookmark this page!" url="/two-letter-words"/>
       <ThreeUp title="Words Starting With" cta="Learn more" text="Find words that start with the letters from your hand" url="/words/starting-with/AA"/>
       <ThreeUp title="Words Ending With" cta="Learn more" text="Find words that end with the letters from your hand" url="/words/ending-with/ING"/>
+      <ThreeUp title="Words Containing" cta="Learn more" text="Find words that contain a sequence of letters in your hand" url="/words/containing/AZ"/>
     </div>
   </div>
 </template>

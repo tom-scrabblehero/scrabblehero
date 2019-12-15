@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Title v-if="loaded" :title="`Words starting with ${ this.$route.params.letters.toUpperCase() }`" />
+    <Title v-if="loaded" :title="`Words ending with ${ this.$route.params.letters.toUpperCase() }`" />
     <SearchForm v-if="loaded" cta="Search" @search="search" />
     <SearchRecommendations v-if="loaded" :words="words" />
   </div>
@@ -14,7 +14,7 @@ import SearchForm from './SearchForm.vue'
 
 
 export default {
-  name: 'two-letter-words',
+  name: 'words-ending-with',
   data: function() {
     return {
       words: null

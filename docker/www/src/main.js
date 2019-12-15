@@ -10,6 +10,7 @@ import Contact from './components/Contact.vue'
 import TwoLetterWords from './components/TwoLetterWords.vue'
 import WordsStartingWith from './components/WordsStartingWith.vue'
 import WordsEndingWith from './components/WordsEndingWith.vue'
+import WordsContaining from './components/WordsContaining.vue'
 
 
 import './assets/styles.scss'
@@ -32,6 +33,7 @@ const routes = [
   {name: 'two-letter-words', path: '/two-letter-words', component: TwoLetterWords},
   {name: 'words-starting-with', path: '/words/starting-with/:letters', component: WordsStartingWith},
   {name: 'words-ending-with', path: '/words/ending-with/:letters', component: WordsEndingWith},
+  {name: 'words-containing', path: '/words/containing/:letters', component: WordsContaining},
 ]
 
 const router = new VueRouter({
