@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand href="/">Scrabble Hero</b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="/two-letter-words">Two Letter Words</b-nav-item>
-          <b-nav-item href="/words/starting-with/aa">Words starting with...</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-
+    <Navbar />
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+
+import Navbar from './components/Navbar.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Navbar
+  }
+}
+
+</script>
