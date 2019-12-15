@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Title title="Words starting with..." />
+    <Title v-if="loaded" :title="`Words starting with ${ this.$route.params.letters.toUpperCase() }`" />
     <SearchForm v-if="loaded" cta="Search" @search="search" />
     <SearchRecommendations v-if="loaded" :words="words" />
   </div>
